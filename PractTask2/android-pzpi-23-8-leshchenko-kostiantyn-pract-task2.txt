@@ -1,0 +1,326 @@
+﻿Харківський університет радіоелектроніки
+Факультет комп'ютерних наук
+Кафедра програмної інженерії
+
+
+
+
+
+
+
+ЗВІТ
+до практичного заняття 2 з дисципліни
+"Програмування під Android"
+на тему "Створення мінімального Android застосунку"
+
+
+
+
+
+
+Виконав ст. гр ПЗПІ-23-8                                                 Перевірив
+Лещенко Костянтин Сергійович                                     ст. викладач кафедри ПІ
+                                                                                            Сокорчук Ігор Петрович
+
+
+
+Харків 2024
+
+МЕТА
+     
+     Метою цієї роботи є ознайомлення із основами розробки інтерфейсу користувача в Android, включаючи створення та налаштування розмітки екрана, управління життєвим циклом Activity, а також використання різних методів для збереження стану та забезпечення плавного користувацького досвіду.
+
+ЗАВДАННЯ
+     
+     Створити простий інтерфейс з використанням елементів, таких як TextView, Button, ImageView та налаштувати розташування елементів, використовуючи LinearLayout. 
+     Створити розмітку, що містить кілька кнопок, розташованих одна під одною. Задати для кожної кнопки властивості layout_width та layout_height, поексперементувати з різними значеннями, як wrap_content та match_parent.
+     Дослідити та використати такі атрибути, як padding, margin, gravity та layout_gravity для налаштування відступів та вирівнювання елементів.
+     Налаштувати текстові поля TextView з різними стилями (розмір шрифту, колір, жирність тощо).
+     Додати до кнопки обробник події натискання у файлі MainActivity.java.
+     Створити FrameLayout та додати до нього кілька єлементів, та побачити, як вони накладаються один на одного. 
+     Створити GridLayout та додати у нього кілька єлементів у вигляді таблиці, задаючи кількість стовпців і рядків.
+      Додати до кожного методу життєвого циклу (onCreate, onStart, onResume тощо) функцію виведення повідомлень у лог (Log.d) для відстеження послідовності викликів. Зрозуміти порядок викликів методів під час запуску та закриття Activity.
+     Змінити орієнтацію пристрою (з портретної на ландшафтну) та спостерігти за викликами методів життєвого циклу у логах.
+     Створити поле для введення тексту (EditText) в Activity, а також перевизначити методи onSaveInstanceState() і onRestoreInstanceState() для збереження та відновлення тексту під час зміни орієнтації екрана.
+     Створити друге Activity, додати кнопку для переходу, а також відстежувати виклики методів життєвого циклу.
+     Додати кнопку, яка викликає метод finish() та відстежити послідовність викликів методів життєвого циклу.
+
+ХІД РОБОТИ
+
+     Створив простий інтерфейс з використанням елементів, таких як TextView, Button, ImageView та налаштувати розташування елементів, використовуючи LinearLayout. 
+     За допомогою коду створив розмітку, що містить кілька кнопок, розташованих одна під одною. Задав для кожної кнопки властивості layout_width та layout_height, поексперементувати з різними значеннями, як wrap_content та match_parent.
+     Дослідив та використав такі атрибути, як padding, margin, gravity та layout_gravity для налаштування відступів та вирівнювання елементів.
+     Налаштував текстові поля TextView з різними стилями (розмір шрифту, колір, жирність тощо).
+     Додав до кнопки обробник події натискання у файлі MainActivity.java.
+     Створив FrameLayout та додати до нього кілька єлементів, щоб як вони накладаються один на одного. 
+     Створив GridLayout та додав у нього кілька єлементів у вигляді таблиці, задаючи кількість стовпців і рядків.
+      Додав до кожного методу життєвого циклу (onCreate, onStart, onResume тощо) функцію виведення повідомлень у лог (Log.d) для відстеження послідовності викликів. 
+     Змінив орієнтацію пристрою (з портретної на ландшафтну) та спостерігти за викликами методів життєвого циклу у логах.
+     Створив поле для введення тексту (EditText) в Activity, а також перевизначив методи onSaveInstanceState() і onRestoreInstanceState() для збереження та відновлення тексту під час зміни орієнтації екрана.
+     Створив друге Activity та додав кнопку для переходу, а також відстежувати виклики методів життєвого циклу.
+     Додав кнопку, яка викликає метод finish() та відстежив послідовність викликів методів життєвого циклу.
+
+ВИСНОВКИ
+     
+     Посилання на відео в YouTube: https://youtu.be/uCoyV-_uCvE
+     
+     У процесі розробки Android-додатка були реалізовані ключові елементи інтерфейсу, такі як TextView, Button і ImageView, за допомогою LinearLayout, GridLayout і FrameLayout. Впровадження відступів і налаштування вирівнювання суттєво підвищили зручність користування.
+
+Вивчення методів життєвого циклу Activity дало змогу краще зрозуміти процеси ініціалізації та завершення компонентів. Логування викликів методів дозволило ефективно аналізувати, як система реагує на різноманітні події. Додавання EditText з перевизначенням onSaveInstanceState() гарантувало, що текст зберігається навіть при зміні орієнтації екрана.
+
+Розробка другого Activity підкреслила важливість управління життєвим циклом для забезпечення плавного функціонування додатка, що значно розширило мої знання у сфері Android-розробки.
+
+ВИКОРИСТАННІ ДЖЕРЕЛА
+
+1. YouTube. " Розробка Android Додатка "Месенджер" Частина 1" https://www.youtube.com/watch?v=UEKI4I9RV24. 
+2. Національний університет радіоелектроніки. https://dl.nure.ua/. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ДОДАТОК А
+LinearLayout з елементами
+<LinearLayout
+    android:id="@+id/linearLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:ignore="MissingConstraints"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="0dp">
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:background="#73A1DC"
+        android:gravity="center"
+        android:text="Text111"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textStyle="bold"/>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="8dp"
+        android:text="Button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        android:textStyle="bold"
+   />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="98dp"
+        android:layout_height="73dp"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button"
+        tools:srcCompat="@tools:sample/avatars" />
+</LinearLayout>
+
+
+
+
+ДОДАТОК Б
+Розмітка з трома кнопками
+<LinearLayout
+    android:id="@+id/linearLayout3"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.444"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button" />
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button" />
+</LinearLayout>
+
+
+      
+ДОДАТОК В
+Обробник події натискання кнопки
+buttonChange.setOnClickListener(view -> {
+    String newText = editText.getText().toString();
+    textView.setText(newText.isEmpty() ? "Порожній" : newText);
+});
+buttonShow.setOnClickListener(view -> {
+    Toast.makeText(MainActivity.this, "Повідомлення виведено!", Toast.LENGTH_SHORT).show();
+});
+
+
+ДОДАТОК Г
+GridLayout  та FrameLayout з елементами
+
+<androidx.gridlayout.widget.GridLayout
+    android:id="@+id/gridLayout"
+    android:layout_width="398dp"
+    android:layout_height="167dp"
+    android:layout_marginTop="1dp"
+    app:columnCount="2"
+    app:rowCount="3"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+    <Button
+        android:id="@+id/button10"
+        android:layout_width="202dp"
+        android:layout_height="wrap_content"
+        android:text="Змінити текст"
+        app:layout_column="0"
+        app:layout_row="0" />
+
+    <Button
+        android:id="@+id/button11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Вивести повідомлення"
+        app:layout_column="0"
+        app:layout_row="1" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="79dp"
+        android:layout_height="70dp"
+        app:layout_column="0"
+        app:layout_row="2"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_column="1"
+        app:layout_row="0" />
+
+    <EditText
+        android:id="@+id/editTextText"
+        android:layout_width="102dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Name"
+        app:layout_column="1"
+        app:layout_row="1" />
+</androidx.gridlayout.widget.GridLayout>
+
+
+
+
+
+<FrameLayout
+    android:layout_width="409dp"
+    android:layout_height="211dp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/gridLayout">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        android:layout_marginLeft="30dp"/>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="258dp"
+        android:layout_height="wrap_content"
+        tools:srcCompat="@tools:sample/backgrounds/scenic"
+        android:layout_marginLeft="30dp"
+        android:src="@drawable/aple"/>
+</FrameLayout>
+
+
+ДОДАТОК Д
+Функції виведення Activity повідомлень у лог
+@Override
+protected void onStart(){
+    super.onStart();
+    Log.d("Акт.2", "onStart called");
+}
+@Override
+protected void  onResume(){
+    super.onResume();
+    Log.d("Акт.2", "onResume called");
+}
+@Override
+protected void onPause(){
+    super.onPause();
+    Log.d("Акт.2", "onPause called");
+}
+@Override
+protected void  onStop(){
+    super.onStop();
+    Log.d("Акт.2", "onStop called");
+}
+@Override
+protected void  onDestroy(){
+    super.onDestroy();
+    Log.d("Акт.2", "onDestroy called");
+}
+
+
+
+
+ДОДАТОК Е
+Методи onSaveInstanceState() і onRestoreInstanceState()
+
+protected void onSaveInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
+         EditText editText = findViewById(R.id.editTextText2);
+         outState.putString("KEY", editText.getText().toString());
+         Log.d("Акт.1", "onSaveInstanceState called");
+     }
+     @Override
+protected void onRestoreInstanceState(Bundle SavedInstanceState){
+    super.onRestoreInstanceState(SavedInstanceState);
+         Log.d("Акт.1", "onRestoreInstanceState");
+     }
+
