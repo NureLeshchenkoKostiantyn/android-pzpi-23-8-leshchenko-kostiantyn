@@ -1,1 +1,220 @@
+﻿Харківський університет радіоелектроніки
+Факультет комп'ютерних наук
+Кафедра програмної інженерії
+
+
+
+
+
+
+
+ЗВІТ
+до лабораторного заняття 2 з дисципліни
+"Програмування під Android"
+на тему " Регулятори SeekBar"
+
+
+
+
+
+
+Виконав ст. гр ПЗПІ-23-8                                                 Перевірив
+Лещенко Костянтин Сергійович                                     ст. викладач кафедри ПІ
+                                                                                            Сокорчук Ігор Петрович
+
+
+
+Харків 2024
+Мета завдання:
+Розробити Android-застосунок, який дозволяє користувачу змінювати колір панелі за допомогою трьох регуляторів SeekBar, кожен з яких відповідає за одну з компонентів кольору RGB. Зовнішній вигляд екрану редактора повинен адаптуватися в залежності від орієнтації пристрою. У портретній орієнтації регулятори мають розташовуватися під панеллю, займати 1/3 висоти екрана і розтягуватися на всю ширину, а в ландшафтній — розміщуватися праворуч від панелі, займати 1/3 ширини екрану, при цьому кольорова панель повинна займати решту екрану.
+
+
+
+ Хід роботи
+
+Для реалізації цього завдання спершу було створено інтерфейс користувача, в якому для управління кольором панелі використано три SeekBar, кожен з яких відповідає за одну з компонент RGB (червоний, зелений, синій). Додатково, була створена кольорова панель, яка змінює свій колір відповідно до значень, що обираються на SeekBar.
+
+Щоб кожен SeekBar дозволяв змінювати значення відповідної компоненти кольору в діапазоні від 0 до 255. Для цього було реалізовано прослуховування подій на кожному SeekBar за допомогою методу setOnSeekBarChangeListener, щоб на кожну зміну значень RGB панель оновлювала свій колір за допомогою методу setBackgroundColor(). В результаті, при зміні значень SeekBar колір панелі змінювався миттєво.
+
+Наступним кроком було забезпечення адаптивності інтерфейсу в залежності від орієнтації екрану. Для цього був використаний метод onConfigurationChanged, який реагує на зміну орієнтації пристрою. Коли орієнтація змінюється на ландшафтну, регулятори SeekBar переміщуються праворуч від панелі, а панель займає більшу частину екрану. В портретній орієнтації регулятори з'являються під панеллю, займаючи 1/3 висоти екрану, а сама панель займає залишок. Для цього використовуються LayoutParams для зміни розмірів та орієнтації елементів.
+
+Під час реалізації було використано компонент LinearLayout, що дозволяє легко змінювати орієнтацію елементів і відповідно адаптувати інтерфейс. У ландшафтній орієнтації регулятори і панель займають різні частини екрану відповідно до заданих пропорцій, а в портретній — регулятори з'являються знизу і займають всю ширину екрана.
+
+
+
+ВИСНОВКИ
+     
+Посилання на відео в YouTube: https://youtu.be/CGf5jZFBaqE
+
+
+ВИКОРИСТАННІ ДЖЕРЕЛА
+
+1. YouTube. " Як Зробити Android Додаток з Нуля" https://www.youtube.com/watch?v=p0tmWQIKk4g. 
+2. YouTube. " SeekBar Tutorial | How to use SeekBar in Android" https://www.youtube.com/watch?v=wvEYmFf7bhc. 
+3. Національний університет радіоелектроніки. https://dl.nure.ua/. 
+
+
+
+
+
+
+ДОДАТОК А
+Інтерфейс активності у файлі activity_main.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+
+        android:id="@+id/layout1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:fitsSystemWindows="true">
+
+        <View
+            android:id="@+id/colorP"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+             />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+
+        <SeekBar
+            android:id="@+id/seekBarR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:thumbTint="#FF0000"
+            android:max="255"/>
+
+        <SeekBar
+            android:id="@+id/seekBarG"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:thumbTint="#00FF07"
+            android:max="255"/>
+
+        <SeekBar
+            android:id="@+id/seekBarB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:thumbTint="#002FFF"
+            android:max="255"/>
+    </LinearLayout>
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+
+
+
+
+ДОДАТОК Б
+Файл MainActivity.java
+package com.example.labtask21;
+
+import android.content.res.Configuration;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.SeekBar;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+public class MainActivity extends AppCompatActivity {
+private View colorP;
+private SeekBar seekBarR, seekBarG, seekBarB;
+private LinearLayout layout1, linearLayout;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_main);
+
+        colorP = findViewById(R.id.colorP);
+        seekBarR = findViewById(R.id.seekBarR);
+        seekBarG = findViewById(R.id.seekBarG);
+        seekBarB = findViewById(R.id.seekBarB);
+        linearLayout = findViewById(R.id.linearLayout);
+        layout1 = findViewById(R.id.layout1);
+        configureLayoutForOrientation();
+
+        SeekBar.OnSeekBarChangeListener listener = new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                updateColor();
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        };
+        seekBarR.setOnSeekBarChangeListener(listener);
+        seekBarG.setOnSeekBarChangeListener(listener);
+        seekBarB.setOnSeekBarChangeListener(listener);
+        updateColor();
+    }
+    private void updateColor(){
+        int red = seekBarR.getProgress();
+        int green = seekBarG.getProgress();
+        int blue = seekBarB.getProgress();
+        int color = Color.rgb(red, green, blue);
+        colorP.setBackgroundColor(color);
+    }
+
+    private void configureLayoutForOrientation() {
+
+        int orientation = getResources().getConfiguration().orientation;
+
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            layout1.setOrientation(LinearLayout.HORIZONTAL);
+
+
+            colorP.setLayoutParams(new LinearLayout.LayoutParams(
+                    0, LinearLayout.LayoutParams.MATCH_PARENT, 2));
+            linearLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                    0, LinearLayout.LayoutParams.MATCH_PARENT, 1));
+        } else {
+            layout1.setOrientation(LinearLayout.VERTICAL);
+
+
+            colorP.setLayoutParams(new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, 0, 2));
+            linearLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, 0, 1));
+        }
+    }
+
+
+}
 
