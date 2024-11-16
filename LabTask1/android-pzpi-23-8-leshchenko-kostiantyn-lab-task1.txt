@@ -98,56 +98,56 @@ https://www.youtube.com/watch?v=iF7QpUA_KjE&list=PL7vq4D0vOpQbW4oply2GMQjVeYHNi0
 
 ДОДАТОК Б
 
-package com.example.labtask1;
+1.  package com.example.kostiantyn_leshchenko_pzpi_23_8;;
 
-import android.os.Bundle;
-import android.util.Log;
+2.  import android.os.Bundle;
+3.  import android.util.Log;
 
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+4.  import androidx.activity.EdgeToEdge;
+5.  import androidx.appcompat.app.AppCompatActivity;
+6.  import androidx.core.graphics.Insets;
+7.  import androidx.core.view.ViewCompat;
+8.  import androidx.core.view.WindowInsetsCompat;
 
-public class MainActivity extends AppCompatActivity {
+9.  public class MainActivity extends AppCompatActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
-        Log.d("Життевий цикл", "onCreate");
-    }
-    @Override
-    protected void onStart(){
-        super.onStart();
-        Log.d("Життевий цикл", "onStart");
-    }
-    @Override
-    protected void onResume(){
-        super.onResume();
-        Log.d("Життевий цикл", "onResume");
-    }
-    @Override
-    protected void onPause(){
-        super.onPause();
-        Log.d("Життевий цикл", "onPause");
-    }
-    @Override
-    protected void onStop(){
-        super.onStop();
-        Log.d("Життевий цикл", "onStop");
-    }
-    @Override
-    protected void onRestart(){
-        super.onRestart();
-        Log.d("Життевий цикл", "onRestart");
-    }
-    @Override
-    protected void onDestroy(){
-        super.onDestroy();
-        Log.d("Життевий цикл", "onDestroy");
-    }
-}
+10.    @Override
+11.    protected void onCreate(Bundle savedInstanceState) {
+12.        super.onCreate(savedInstanceState);
+13.        EdgeToEdge.enable(this);
+14.        setContentView(R.layout.activity_main);
+15.        Log.d("Життевий цикл", "onCreate");
+16.    }
+17.    @Override
+18.   protected void onStart(){
+19.        super.onStart();
+20.        Log.d("Життевий цикл", "onStart");
+21.    }
+22.    @Override
+23.    protected void onResume(){
+24.        super.onResume();
+25.        Log.d("Життевий цикл", "onResume");
+26.    }
+27.    @Override
+28.    protected void onPause(){
+29.        super.onPause();
+30.        Log.d("Життевий цикл", "onPause");
+31.    }
+32.    @Override
+33.    protected void onStop(){
+34.        super.onStop();
+35.        Log.d("Життевий цикл", "onStop");
+36.    }
+37.    @Override
+38.    protected void onRestart(){
+39.        super.onRestart();
+40.        Log.d("Життевий цикл", "onRestart");
+41.    }
+42.    @Override
+43.    protected void onDestroy(){
+44.        super.onDestroy();
+45.        Log.d("Життевий цикл", "onDestroy");
+46.    }
+47. }
 
 
