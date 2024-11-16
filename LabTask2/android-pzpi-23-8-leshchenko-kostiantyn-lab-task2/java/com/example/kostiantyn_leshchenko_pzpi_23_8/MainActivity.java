@@ -1,4 +1,4 @@
-package com.example.labtask21;
+package com.example.kostiantyn_leshchenko_pzpi_23_8;
 
 import android.content.res.Configuration;
 import android.graphics.Color;
