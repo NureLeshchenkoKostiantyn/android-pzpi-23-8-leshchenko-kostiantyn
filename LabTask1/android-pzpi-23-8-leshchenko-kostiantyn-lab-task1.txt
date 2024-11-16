@@ -98,7 +98,7 @@ https://www.youtube.com/watch?v=iF7QpUA_KjE&list=PL7vq4D0vOpQbW4oply2GMQjVeYHNi0
 
 ДОДАТОК Б
 
-1.  package com.example.kostiantyn_leshchenko_pzpi_23_8;;
+1.  package com.example.kostiantyn_leshchenko_pzpi_23_8;
 
 2.  import android.os.Bundle;
 3.  import android.util.Log;
