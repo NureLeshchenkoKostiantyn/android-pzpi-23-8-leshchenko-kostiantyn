@@ -65,24 +65,24 @@ https://www.youtube.com/watch?v=iF7QpUA_KjE&list=PL7vq4D0vOpQbW4oply2GMQjVeYHNi0
 
 
 ДОДАТОК А
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    android:gravity="center">
+1.   <LinearLayout
+2.    android:layout_width="match_parent"
+3.    android:layout_height="match_parent"
+4.    android:orientation="vertical"
+5.    app:layout_constraintBottom_toBottomOf="parent"
+6.    app:layout_constraintEnd_toEndOf="parent"
+7.    app:layout_constraintStart_toStartOf="parent"
+8.    app:layout_constraintTop_toTopOf="parent"
+9.    android:gravity="center">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Task1"
-        android:textAlignment="center"
-        android:textSize="25dp"/>
-</LinearLayout>
+10.    <TextView
+11.        android:id="@+id/textView"
+12.        android:layout_width="match_parent"
+13.        android:layout_height="wrap_content"
+14.        android:text="Task1"
+15.        android:textAlignment="center"
+16.        android:textSize="25dp"/>
+17.   </LinearLayout>
 
 
 
