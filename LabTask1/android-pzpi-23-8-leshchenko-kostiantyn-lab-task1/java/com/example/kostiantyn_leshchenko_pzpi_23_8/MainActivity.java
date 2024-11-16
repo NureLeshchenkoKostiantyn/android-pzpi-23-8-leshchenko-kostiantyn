@@ -1,4 +1,4 @@
-package com.example.labtask1;
+package com.example.kostiantyn_leshchenko_pzpi_23_8;
 
 import android.os.Bundle;
 import android.util.Log;
