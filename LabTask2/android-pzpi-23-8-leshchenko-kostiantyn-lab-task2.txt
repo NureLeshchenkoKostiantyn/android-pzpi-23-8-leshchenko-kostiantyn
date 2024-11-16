@@ -65,63 +65,63 @@
 ДОДАТОК А
 Інтерфейс активності у файлі activity_main.xml
 
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+1.  <?xml version="1.0" encoding="utf-8"?>
+2.  <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+3.    xmlns:app="http://schemas.android.com/apk/res-auto"
+4.    xmlns:tools="http://schemas.android.com/tools"
+5.    android:id="@+id/main"
+6.    android:layout_width="match_parent"
+7.    android:layout_height="match_parent"
+8.    tools:context=".MainActivity">
 
-    <LinearLayout
+9.    <LinearLayout
 
-        android:id="@+id/layout1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:fitsSystemWindows="true">
+10.        android:id="@+id/layout1"
+11.        android:layout_width="match_parent"
+12.        android:layout_height="match_parent"
+13.        android:orientation="vertical"
+14.        android:fitsSystemWindows="true">
 
-        <View
-            android:id="@+id/colorP"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-             />
+15.        <View
+16.            android:id="@+id/colorP"
+17.            android:layout_width="match_parent"
+18.            android:layout_height="0dp"
+19.            android:layout_weight="2"
+20.             />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        >
+21.    <LinearLayout
+22.       android:id="@+id/linearLayout"
+23.        android:layout_width="match_parent"
+24.        android:layout_height="0dp"
+25.        android:layout_weight="1"
+26.        android:orientation="vertical"
+27.        >
 
-        <SeekBar
-            android:id="@+id/seekBarR"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:thumbTint="#FF0000"
-            android:max="255"/>
+28.        <SeekBar
+29.            android:id="@+id/seekBarR"
+30.            android:layout_width="match_parent"
+31.            android:layout_height="wrap_content"
+32.            android:thumbTint="#FF0000"
+33.            android:max="255"/>
 
-        <SeekBar
-            android:id="@+id/seekBarG"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:thumbTint="#00FF07"
-            android:max="255"/>
+34.        <SeekBar
+35.            android:id="@+id/seekBarG"
+36.            android:layout_width="match_parent"
+37.            android:layout_height="wrap_content"
+38.            android:thumbTint="#00FF07"
+39.            android:max="255"/>
 
-        <SeekBar
-            android:id="@+id/seekBarB"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:thumbTint="#002FFF"
-            android:max="255"/>
-    </LinearLayout>
+40.        <SeekBar
+41.            android:id="@+id/seekBarB"
+42.            android:layout_width="match_parent"
+43.            android:layout_height="wrap_content"
+44.            android:thumbTint="#002FFF"
+45.            android:max="255"/>
+46.    </LinearLayout>
 
 
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+47.    </LinearLayout>
+48.  </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
@@ -134,91 +134,91 @@
 
 ДОДАТОК Б
 Файл MainActivity.java
-package com.example.kostiantyn_leshchenko_pzpi_23_8;
+1. package com.example.kostiantyn_leshchenko_pzpi_23_8;
 
-import android.content.res.Configuration;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.SeekBar;
+2. import android.content.res.Configuration;
+3. import android.graphics.Color;
+4. import android.os.Bundle;
+5. import android.view.View;
+6. import android.widget.LinearLayout;
+7. import android.widget.SeekBar;
 
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+8. import androidx.activity.EdgeToEdge;
+9. import androidx.appcompat.app.AppCompatActivity;
+10. import androidx.core.graphics.Insets;
+11. import androidx.core.view.ViewCompat;
+12. import androidx.core.view.WindowInsetsCompat;
 
-public class MainActivity extends AppCompatActivity {
-private View colorP;
-private SeekBar seekBarR, seekBarG, seekBarB;
-private LinearLayout layout1, linearLayout;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
+13. public class MainActivity extends AppCompatActivity {
+14. private View colorP;
+15. private SeekBar seekBarR, seekBarG, seekBarB;
+16. private LinearLayout layout1, linearLayout;
+17.    @Override
+18.    protected void onCreate(Bundle savedInstanceState) {
+19.        super.onCreate(savedInstanceState);
+20.        EdgeToEdge.enable(this);
+21.        setContentView(R.layout.activity_main);
 
-        colorP = findViewById(R.id.colorP);
-        seekBarR = findViewById(R.id.seekBarR);
-        seekBarG = findViewById(R.id.seekBarG);
-        seekBarB = findViewById(R.id.seekBarB);
-        linearLayout = findViewById(R.id.linearLayout);
-        layout1 = findViewById(R.id.layout1);
-        configureLayoutForOrientation();
+22.        colorP = findViewById(R.id.colorP);
+23.        seekBarR = findViewById(R.id.seekBarR);
+24.        seekBarG = findViewById(R.id.seekBarG);
+25.        seekBarB = findViewById(R.id.seekBarB);
+26.        linearLayout = findViewById(R.id.linearLayout);
+27.        layout1 = findViewById(R.id.layout1);
+28.        configureLayoutForOrientation();
 
-        SeekBar.OnSeekBarChangeListener listener = new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                updateColor();
-            }
+29.        SeekBar.OnSeekBarChangeListener listener = new SeekBar.OnSeekBarChangeListener() {
+30.            @Override
+31.            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+32.                updateColor();
+33.            }
 
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
+34.            @Override
+35.            public void onStartTrackingTouch(SeekBar seekBar) {
 
-            }
+36.            }
 
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
+37.            @Override
+38.            public void onStopTrackingTouch(SeekBar seekBar) {
 
-            }
-        };
-        seekBarR.setOnSeekBarChangeListener(listener);
-        seekBarG.setOnSeekBarChangeListener(listener);
-        seekBarB.setOnSeekBarChangeListener(listener);
-        updateColor();
-    }
-    private void updateColor(){
-        int red = seekBarR.getProgress();
-        int green = seekBarG.getProgress();
-        int blue = seekBarB.getProgress();
-        int color = Color.rgb(red, green, blue);
-        colorP.setBackgroundColor(color);
-    }
+39.           }
+40.        };
+41.        seekBarR.setOnSeekBarChangeListener(listener);
+42.        seekBarG.setOnSeekBarChangeListener(listener);
+43.        seekBarB.setOnSeekBarChangeListener(listener);
+44.        updateColor();
+45.    }
+46.    private void updateColor(){
+47.        int red = seekBarR.getProgress();
+48.        int green = seekBarG.getProgress();
+49.        int blue = seekBarB.getProgress();
+50.        int color = Color.rgb(red, green, blue);
+51.        colorP.setBackgroundColor(color);
+52.    }
 
-    private void configureLayoutForOrientation() {
+53.    private void configureLayoutForOrientation() {
 
-        int orientation = getResources().getConfiguration().orientation;
+54.        int orientation = getResources().getConfiguration().orientation;
 
-        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            layout1.setOrientation(LinearLayout.HORIZONTAL);
-
-
-            colorP.setLayoutParams(new LinearLayout.LayoutParams(
-                    0, LinearLayout.LayoutParams.MATCH_PARENT, 2));
-            linearLayout.setLayoutParams(new LinearLayout.LayoutParams(
-                    0, LinearLayout.LayoutParams.MATCH_PARENT, 1));
-        } else {
-            layout1.setOrientation(LinearLayout.VERTICAL);
+55.        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+56.            layout1.setOrientation(LinearLayout.HORIZONTAL);
 
 
-            colorP.setLayoutParams(new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT, 0, 2));
-            linearLayout.setLayoutParams(new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT, 0, 1));
-        }
-    }
+57.           colorP.setLayoutParams(new LinearLayout.LayoutParams(
+58.                    0, LinearLayout.LayoutParams.MATCH_PARENT, 2));
+60.            linearLayout.setLayoutParams(new LinearLayout.LayoutParams(
+61.                    0, LinearLayout.LayoutParams.MATCH_PARENT, 1));
+62.        } else {
+63.            layout1.setOrientation(LinearLayout.VERTICAL);
 
 
-}
+64.           colorP.setLayoutParams(new LinearLayout.LayoutParams(
+65.                    LinearLayout.LayoutParams.MATCH_PARENT, 0, 2));
+66.           linearLayout.setLayoutParams(new LinearLayout.LayoutParams(
+67.                    LinearLayout.LayoutParams.MATCH_PARENT, 0, 1));
+68.        }
+69.    }
+
+
+70. }
 
