@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- SharedPreferences Section -->
+    <EditText
+        android:id="@+id/editTextName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Name" />
+
+    <EditText
+        android:id="@+id/editTextAge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Age"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/buttonSavePrefs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save to SharedPreferences" />
+
+    <!-- Кнопка для відображення даних з SharedPreferences -->
+    <Button
+        android:id="@+id/buttonShowPrefs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Show SharedPreferences" />
+
+    <TextView
+        android:id="@+id/textViewPrefs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SharedPreferences data will be displayed here"
+        android:textSize="18sp"
+        android:paddingTop="16dp" />
+
+    <!-- SQLite Section -->
+    <Button
+        android:id="@+id/buttonAddUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add User to SQLite" />
+
+    <TextView
+        android:id="@+id/textViewUsers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Users will be displayed here"
+        android:textSize="18sp"
+        android:paddingTop="16dp" />
+
+    <!-- File Section -->
+    <EditText
+        android:id="@+id/editTextFile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter text to save to file" />
+
+    <Button
+        android:id="@+id/buttonSaveFile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save to File" />
+
+    <Button
+        android:id="@+id/buttonLoadFile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Load from File" />
+
+    <TextView
+        android:id="@+id/textViewFileContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="File content will be displayed here"
+        android:textSize="18sp"
+        android:paddingTop="16dp" />
+</LinearLayout>
