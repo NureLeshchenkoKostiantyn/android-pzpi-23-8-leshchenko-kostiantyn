@@ -97,8 +97,8 @@ o Використано FileInputStream та FileOutputStream для збере
 
 ВИКОРИСТАННІ ДЖЕРЕЛА
 
-1. YouTube. " Як Зробити Android Додаток з Нуля" https://www.youtube.com/watch?v=p0tmWQIKk4g. Дата доступу: 4 грудня 2024 року.
-2. Національний університет радіоелектроніки. https://dl.nure.ua/. Дата доступу: 4 грудня 2024 року.
+1. YouTube. " Як Зробити Android Додаток з Нуля" https://www.youtube.com/watch?v=p0tmWQIKk4g. 
+2. Національний університет радіоелектроніки. https://dl.nure.ua/. 
 
 
 
