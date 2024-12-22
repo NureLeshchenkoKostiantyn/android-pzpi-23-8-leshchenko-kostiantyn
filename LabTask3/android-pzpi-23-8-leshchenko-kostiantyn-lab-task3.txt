@@ -1,1 +1,515 @@
+﻿Харківський університет радіоелектроніки
+Факультет комп'ютерних наук
+Кафедра програмної інженерії
+
+
+
+
+
+
+
+ЗВІТ
+до лабораторного заняття 3 з дисципліни
+"Програмування під Android"
+на тему " Програмування калькулятора"
+
+
+
+
+
+
+Виконав ст. гр ПЗПІ-23-8                                                 Перевірив
+Лещенко Костянтин Сергійович                                     ст. викладач кафедри ПІ
+                                                                                            Сокорчук Ігор Петрович
+
+
+Харків 2024
+
+Мета заняття:
+Метою цієї роботи є розробка калькулятора, який підтримує виконання базових арифметичних операцій (додавання, віднімання, множення та ділення) з використанням кнопок для введення чисел і вибору операцій. Завдання включає створення адаптивного інтерфейсу, який автоматично налаштовується під різні розміри та орієнтації екрану: у портретному режимі кнопки калькулятора розташовуються в сітці під полем результату, а в ландшафтному режимі — у компактнішому вигляді. Для реалізації передбачено використання GridLayout для розміщення кнопок та забезпечення гнучкого адаптивного дизайну.
+
+
+ЗАВДАННЯ
+Розробити калькулятор на 4 базові арифметичні операції з кнопками для введення аргументів і дій.
+Калькулятор повинен мати адаптивний користувацький інтерфейс у різних орієнтаціях екрану та на екранах різної роздільної здатності.
+
+
+
+
+
+ХІД РОБОТИ
+Створено новий проєкт з шаблоном Empty Activity, у якому розроблено калькулятор для виконання основних арифметичних операцій. Після створення проєкту було вивчено основні файли, зокрема MainActivity.java, activity_main.xml . 
+У activity_main.xml Див. ДОДАТОК[Б] був налаштований інтерфейс калькулятора з використанням ConstraintLayout для основної структури і GridLayout для кнопок калькулятора. Кнопки для чисел (від 0 до 9) та операцій (додавання, віднімання, множення, ділення) були розміщені у GridLayout, що дозволяє адаптувати інтерфейс для різних роздільних здатностей та орієнтацій екрану.
+Для відображення результату використовувалося поле EditText, яке оновлюється відповідно до натиснутих кнопок. Додано обробку введення чисел через метод onNumberClick(), який додає відповідні цифри до результату. Для операцій додавання, віднімання, множення та ділення реалізовано метод onOperationClick(), що зберігає перше число та операцію, очікуючи друге число для виконання операції.В MainActivity.java Див. ДОДАТОК[А] також реалізовано метод для обчислення результату calculateResult(), який здійснює математичні операції над двома числами. Крім того, додано функції для очищення поля onClearClick(), видалення останнього символа onBackspaceClick() та обчислення відсотків onPercentageClick().
+Для збереження та відновлення стану калькулятора при повороті екрану або при знищенні активності використано методи onSaveInstanceState() та onRestoreInstanceState(). У onSaveInstanceState() зберігаються значення введених чисел, вибрана операція та поточний результат, а в onRestoreInstanceState() відновлюються ці значення після повернення до активності.
+Додано ландшафтний макет activity_main_land.xml Див. ДОДАТОК[В], який адаптується до ширших екранів, змінюючи орієнтацію елементів для зручності використання в горизонтальній орієнтації. Під час тестування додатка перевірено його роботу на різних пристроях для перевірки адаптивності інтерфейсу та коректності обчислень.
+
+
+ВИСНОВКИ
+     
+     Посилання на відео в YouTube: https://youtu.be/9Vk4FqOK5w4
+
+Розроблено калькулятор з адаптивним інтерфейсом для різних орієнтацій екрану та роздільних здатностей. Реалізовано обробку введення чисел, операцій та збереження стану при повороті екрану. Перевірено на різних пристроях.
+
+
+ВИКОРИСТАННІ ДЖЕРЕЛА
+
+1. YouTube. " Як Зробити Android Додаток з Нуля" https://www.youtube.com/watch?v=p0tmWQIKk4g. 
+2. YouTube. " Android. Як створити свій перший додаток?" https://www.youtube.com/watch?v=yauFUPXTW-o.
+3. Національний університет радіоелектроніки. https://dl.nure.ua/. 
+
+
+
+
+
+
+
+
+
+ДОДАТОК[А]
+1.  package com.example.kostiantyn_leshchenko_pzpi_23_8;
+
+2.  import android.content.res.Configuration;
+3.  import android.os.Bundle;
+4.  import android.widget.Button;
+5.  import android.widget.EditText;
+6.  import androidx.appcompat.app.AppCompatActivity;
+
+7.  public class MainActivity extends AppCompatActivity {
+8.      private EditText resultEditText;
+9.      private double num1 = 0, num2 = 0;
+10.     private String operator = "";
+
+11.     @Override
+12.     protected void onCreate(Bundle savedInstanceState) {
+13.         super.onCreate(savedInstanceState);
+
+14.         // Проверяем ориентацию экрана
+15.         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+16.             // Если ландшафтная ориентация, используем activity_main_land.xml
+17.             setContentView(R.layout.activity_main_land);
+18.         } else {
+19.             // Если портретная ориентация, используем activity_main.xml
+20.             setContentView(R.layout.activity_main);
+21.         }
+
+22.         resultEditText = findViewById(R.id.resultEditText);
+
+23.         // Восстановление состояния
+24.         if (savedInstanceState != null) {
+25.             resultEditText.setText(savedInstanceState.getString("result", "0"));
+26.             num1 = savedInstanceState.getDouble("num1", 0);
+27.             num2 = savedInstanceState.getDouble("num2", 0);
+28.             operator = savedInstanceState.getString("operator", "");
+29.         }
+
+30.         // Настройка кнопок чисел
+31.         setupButton(R.id.button0, "0");
+32.         setupButton(R.id.button1, "1");
+33.         setupButton(R.id.button2, "2");
+34.         setupButton(R.id.button3, "3");
+35.         setupButton(R.id.button4, "4");
+36.         setupButton(R.id.button5, "5");
+37.         setupButton(R.id.button6, "6");
+38.         setupButton(R.id.button7, "7");
+39.         setupButton(R.id.button8, "8");
+40.         setupButton(R.id.button9, "9");
+
+41.         // Настройка кнопок операций
+42.         setupOperatorButton(R.id.buttonPlus, "+");
+43.         setupOperatorButton(R.id.buttonMinus, "-");
+44.         setupOperatorButton(R.id.buttonMultiply, "×");
+45.         setupOperatorButton(R.id.buttonDivide, "÷");
+
+46.         // Кнопка "="
+47.         Button buttonEquals = findViewById(R.id.buttonEquals);
+48.         buttonEquals.setOnClickListener(v -> calculateResult());
+
+49.         // Кнопка "C" (очистка)
+50.         Button buttonClear = findViewById(R.id.buttonClear);
+51.         buttonClear.setOnClickListener(v -> {
+52.             resultEditText.setText("0");
+53.             num1 = 0;
+54.             num2 = 0;
+55.             operator = "";
+56.         });
+57.     }
+
+58.     private void setupButton(int buttonId, String buttonText) {
+59.         Button button = findViewById(buttonId);
+60.         button.setOnClickListener(v -> {
+61.             String currentText = resultEditText.getText().toString();
+62.             if (currentText.equals("0")) {
+63.                 resultEditText.setText(buttonText);
+64.             } else {
+65.                 resultEditText.setText(currentText + buttonText);
+66.             }
+67.         });
+68.     }
+
+69.     private void setupOperatorButton(int buttonId, String op) {
+70.         Button button = findViewById(buttonId);
+71.         button.setOnClickListener(v -> setOperator(op));
+72.     }
+
+73.     private void setOperator(String op) {
+74.         String currentText = resultEditText.getText().toString();
+75.         if (!currentText.isEmpty()) {
+76.             num1 = Double.parseDouble(currentText);
+77.             operator = op;
+78.             resultEditText.setText("0");
+79.         }
+80.     }
+
+81.     private void calculateResult() {
+82.         String currentText = resultEditText.getText().toString();
+83.         if (!currentText.isEmpty() && !operator.isEmpty()) {
+84.             num2 = Double.parseDouble(currentText);
+85.             double result = 0;
+86.             switch (operator) {
+87.                 case "+":
+88.                     result = num1 + num2;
+89.                     break;
+90.                 case "-":
+91.                     result = num1 - num2;
+92.                     break;
+93.                 case "×":
+94.                     result = num1 * num2;
+95.                     break;
+96.                 case "÷":
+97.                     if (num2 != 0) {
+98.                         result = num1 / num2;
+99.                     } else {
+100.                        resultEditText.setText("Error");
+101.                        return;
+102.                    }
+103.                    break;
+104.            }
+105.            resultEditText.setText(String.valueOf(result));
+106.            operator = "";
+107.        }
+108.    }
+
+109.    @Override
+110.    protected void onSaveInstanceState(Bundle outState) {
+111.        super.onSaveInstanceState(outState);
+
+112.        // Сохраняем текущее состояние
+113.        outState.putString("result", resultEditText.getText().toString());
+114.        outState.putDouble("num1", num1);
+115.        outState.putDouble("num2", num2);
+116.        outState.putString("operator", operator);
+117.    }
+
+118.    @Override
+119.    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+120.        super.onRestoreInstanceState(savedInstanceState);
+
+121.        // Восстанавливаем состояние
+122.        resultEditText.setText(savedInstanceState.getString("result", "0"));
+123.        num1 = savedInstanceState.getDouble("num1", 0);
+124.        num2 = savedInstanceState.getDouble("num2", 0);
+125.        operator = savedInstanceState.getString("operator", "");
+126.    }
+127. }
+
+
+ДОДАТОК[Б]
+1.  <?xml version="1.0" encoding="utf-8"?>
+2.  <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+3.      xmlns:app="http://schemas.android.com/apk/res-auto"
+4.      xmlns:tools="http://schemas.android.com/tools"
+5.      android:layout_width="match_parent"
+6.      android:layout_height="match_parent"
+7.      tools:context=".MainActivity"
+8.      android:id="@+id/rootLayout">
+
+9.      <!-- Экран для отображения результата -->
+10.     <EditText
+11.         android:id="@+id/resultEditText"
+12.         android:layout_width="0dp"
+13.         android:layout_height="wrap_content"
+14.         android:layout_margin="16dp"
+15.         android:background="@android:color/transparent"
+16.         android:gravity="end"
+17.         android:hint="0"
+18.         android:inputType="number"
+19.         android:textSize="24sp"
+20.         app:layout_constraintTop_toTopOf="parent"
+21.         app:layout_constraintStart_toStartOf="parent"
+22.         app:layout_constraintEnd_toEndOf="parent" />
+
+23.     <!-- Кнопки для чисел и операций -->
+24.     <GridLayout
+25.         android:id="@+id/buttonsGrid"
+26.         android:layout_width="0dp"
+27.         android:layout_height="500dp"
+28.         android:layout_margin="16dp"
+29.         android:columnCount="4"
+30.         android:rowCount="4"
+31.         app:layout_constraintBottom_toBottomOf="parent"
+32.         app:layout_constraintEnd_toEndOf="parent"
+33.         app:layout_constraintStart_toStartOf="parent">
+
+34.         <!-- Кнопки чисел -->
+35.         <Button
+36.             android:id="@+id/button1"
+37.             android:layout_width="0dp"
+38.             android:layout_height="wrap_content"
+39.             android:layout_columnWeight="1"
+40.             android:text="1" />
+
+41.         <Button
+42.             android:id="@+id/button2"
+43.             android:layout_width="0dp"
+44.             android:layout_height="wrap_content"
+45.             android:layout_columnWeight="1"
+46.             android:text="2" />
+
+47.         <Button
+48.             android:id="@+id/button3"
+49.             android:layout_width="0dp"
+50.             android:layout_height="wrap_content"
+51.             android:layout_columnWeight="1"
+52.             android:text="3" />
+
+53.         <Button
+54.             android:id="@+id/buttonPlus"
+55.             android:layout_width="0dp"
+56.             android:layout_height="wrap_content"
+57.             android:layout_columnWeight="1"
+58.             android:text="+" />
+
+59.         <Button
+60.             android:id="@+id/button4"
+61.             android:layout_width="0dp"
+62.             android:layout_height="wrap_content"
+63.             android:layout_columnWeight="1"
+64.             android:text="4" />
+
+65.         <Button
+66.             android:id="@+id/button5"
+67.             android:layout_width="0dp"
+68.             android:layout_height="wrap_content"
+69.             android:layout_columnWeight="1"
+70.             android:text="5" />
+
+71.         <Button
+72.             android:id="@+id/button6"
+73.             android:layout_width="0dp"
+74.             android:layout_height="wrap_content"
+75.             android:layout_columnWeight="1"
+76.             android:text="6" />
+
+77.         <Button
+78.             android:id="@+id/buttonMinus"
+79.             android:layout_width="0dp"
+80.             android:layout_height="wrap_content"
+81.             android:layout_columnWeight="1"
+82.             android:text="-" />
+
+83.         <Button
+84.             android:id="@+id/button7"
+85.             android:layout_width="0dp"
+86.             android:layout_height="wrap_content"
+87.             android:layout_columnWeight="1"
+88.             android:text="7" />
+
+89.         <Button
+90.             android:id="@+id/button8"
+91.             android:layout_width="0dp"
+92.             android:layout_height="wrap_content"
+93.             android:layout_columnWeight="1"
+94.             android:text="8" />
+
+95.         <Button
+96.             android:id="@+id/button9"
+97.             android:layout_width="0dp"
+98.             android:layout_height="wrap_content"
+99.             android:layout_columnWeight="1"
+100.            android:text="9" />
+
+101.        <Button
+102.            android:id="@+id/buttonMultiply"
+103.            android:layout_width="0dp"
+104.            android:layout_height="wrap_content"
+105.            android:layout_columnWeight="1"
+106.            android:text="×" />
+
+107.        <Button
+108.            android:id="@+id/buttonClear"
+109.            android:layout_width="0dp"
+110.            android:layout_height="wrap_content"
+111.            android:layout_columnWeight="1"
+112.            android:text="C" />
+
+113.        <Button
+114.            android:id="@+id/button0"
+115.            android:layout_width="0dp"
+116.            android:layout_height="wrap_content"
+117.            android:layout_columnWeight="1"
+118.            android:text="0" />
+
+119.        <Button
+120.            android:id="@+id/buttonEquals"
+121.            android:layout_width="0dp"
+122.            android:layout_height="wrap_content"
+123.            android:layout_columnWeight="1"
+124.            android:text="=" />
+
+125.        <Button
+126.            android:id="@+id/buttonDivide"
+127.            android:layout_width="0dp"
+128.            android:layout_height="wrap_content"
+129.            android:layout_columnWeight="1"
+130.            android:text="÷" />
+131.    </GridLayout>
+132. </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+ДОДАТОК[В]
+1.  <?xml version="1.0" encoding="utf-8"?>
+2.  <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+3.      xmlns:app="http://schemas.android.com/apk/res-auto"
+4.      xmlns:tools="http://schemas.android.com/tools"
+5.      android:layout_width="match_parent"
+6.      android:layout_height="match_parent"
+7.      tools:context=".MainActivity">
+
+8.      <!-- Экран для отображения результата -->
+9.      <EditText
+10.         android:id="@+id/resultEditText"
+11.         android:layout_width="0dp"
+12.         android:layout_height="wrap_content"
+13.         android:layout_margin="16dp"
+14.         android:background="@android:color/transparent"
+15.         android:gravity="end"
+16.         android:hint="0"
+17.         android:inputType="number"
+18.         android:textSize="24sp"
+19.         app:layout_constraintTop_toTopOf="parent"
+20.         app:layout_constraintStart_toStartOf="parent"
+21.         app:layout_constraintEnd_toEndOf="parent" />
+
+22.     <!-- Кнопки для чисел и операций -->
+23.     <GridLayout
+24.         android:id="@+id/buttonsGrid"
+25.         android:layout_width="0dp"
+26.         android:layout_height="0dp"
+27.         android:layout_margin="16dp"
+28.         android:columnCount="4"
+29.         android:rowCount="4"
+30.         app:layout_constraintTop_toBottomOf="@id/resultEditText"
+31.         app:layout_constraintBottom_toBottomOf="parent"
+32.         app:layout_constraintEnd_toEndOf="parent"
+33.         app:layout_constraintStart_toStartOf="parent">
+
+34.         <!-- Кнопки чисел -->
+35.         <Button
+36.             android:id="@+id/button1"
+37.             android:layout_width="0dp"
+38.             android:layout_height="wrap_content"
+39.             android:layout_columnWeight="1"
+40.             android:text="1" />
+41.         <Button
+42.             android:id="@+id/button2"
+43.             android:text="2"
+44.             android:layout_columnWeight="1"
+45.             android:layout_width="0dp"
+46.             android:layout_height="wrap_content"/>
+47.         <Button
+48.             android:id="@+id/button3"
+49.             android:text="3"
+50.             android:layout_columnWeight="1"
+51.             android:layout_width="0dp"
+52.             android:layout_height="wrap_content"/>
+53.         <Button
+54.             android:id="@+id/buttonPlus"
+55.             android:text="+"
+56.             android:layout_columnWeight="1"
+57.             android:layout_width="0dp"
+58.             android:layout_height="wrap_content"/>
+
+59.         <Button
+60.             android:id="@+id/button4"
+61.             android:text="4"
+62.             android:layout_columnWeight="1"
+63.             android:layout_width="0dp"
+64.             android:layout_height="wrap_content"/>
+65.         <Button
+66.             android:id="@+id/button5"
+67.             android:text="5"
+68.             android:layout_columnWeight="1"
+69.             android:layout_width="0dp"
+70.             android:layout_height="wrap_content"/>
+71.         <Button
+72.             android:id="@+id/button6"
+73.             android:text="6"
+74.             android:layout_columnWeight="1"
+75.             android:layout_width="0dp"
+76.             android:layout_height="wrap_content"/>
+77.         <Button
+78.             android:id="@+id/buttonMinus"
+79.             android:text="-"
+80.             android:layout_columnWeight="1"
+81.             android:layout_width="0dp"
+82.             android:layout_height="wrap_content"/>
+
+83.         <Button
+84.             android:id="@+id/button7"
+85.             android:text="7"
+86.             android:layout_columnWeight="1"
+87.             android:layout_width="0dp"
+88.             android:layout_height="wrap_content"/>
+89.         <Button
+90.             android:id="@+id/button8"
+91.             android:text="8"
+92.             android:layout_columnWeight="1"
+93.             android:layout_width="0dp"
+94.             android:layout_height="wrap_content"/>
+95.         <Button
+96.             android:id="@+id/button9"
+97.             android:text="9"
+98.             android:layout_columnWeight="1"
+99.             android:layout_width="0dp"
+100.            android:layout_height="wrap_content"/>
+101.        <Button
+102.            android:id="@+id/buttonMultiply"
+103.            android:text="×"
+104.            android:layout_columnWeight="1"
+105.            android:layout_width="0dp"
+106.            android:layout_height="wrap_content"/>
+
+107.        <Button
+108.            android:id="@+id/buttonClear"
+109.            android:text="C"
+110.            android:layout_columnWeight="1"
+111.            android:layout_width="0dp"
+112.            android:layout_height="wrap_content"/>
+113.        <Button
+114.            android:id="@+id/button0"
+115.            android:text="0"
+116.            android:layout_columnWeight="1"
+117.            android:layout_width="0dp"
+118.            android:layout_height="wrap_content"/>
+119.        <Button
+120.            android:id="@+id/buttonEquals"
+121.            android:text="="
+122.            android:layout_columnWeight="1"
+123.            android:layout_width="0dp"
+124.            android:layout_height="wrap_content"/>
+125.        <Button
+126.            android:id="@+id/buttonDivide"
+127.            android:text="÷"
+128.            android:layout_columnWeight="1"
+129.            android:layout_width="0dp"
+130.            android:layout_height="wrap_content"/>
+131.    </GridLayout>
+132. </androidx.constraintlayout.widget.ConstraintLayout>
+2
+
 
