@@ -1,0 +1,757 @@
+﻿Харківський університет радіоелектроніки
+Факультет комп'ютерних наук
+Кафедра програмної інженерії
+
+
+
+
+
+
+
+ЗВІТ
+до лабораторного заняття 4 з дисципліни
+"Програмування під Android"
+на тему " Застосунок для ведення нотаток."
+
+
+
+
+
+
+Виконав ст. гр ПЗПІ-23-8                                                 Перевірив
+Лещенко Костянтин Сергійович                                     ст. викладач кафедри ПІ
+                                                                                            Сокорчук Ігор Петрович
+
+
+
+Харків 2024
+МЕТА
+     
+    Метою цієї лабораторної роботи є ознайомити студентів з основами розробки мобільних додатків для платформи Android. Зокрема, студенти повинні навчитися реалізовувати функціонал для створення, редагування, перегляду та видалення нотаток. 
+
+
+ЗАВДАННЯ
+
+Розробити застосунок для ведення нотаток.
+Застосунок повинен дозволяти переглядати список нотаток, створювати нову нотатку, редагувати нотатку та видаляти нотатку. Кожна нотатка повинна мати назву, опис, важливість (три класи), час і дату призначення і картинку (вибирається з галереї).
+У списку нотатки відображаються з іконкою з галереї і часом створення (праворуч зверху більш дрібним шрифтом), а також графічним відображенням класу важливості (іконка з множини).
+Потрібно реалізувати функції додавання, видалення, редагування (без збереження між перезапуск додатку) нотаток.
+Видалення/редагування викликаються з контекстного меню при довгому натисненні, додавання - з основного меню в ActionBar. У ActionBar реалізувати пошук / фільтрація заміток за змістом тексту, а також фільтрацію за важливістю. Текстові елементи користувацького інтерфейсу повинні бути локалізовані українською та англійською мовами.
+
+
+
+ХІД РОБОТИ
+
+1. Клас `Note.java`
+Призначення:  
+Клас `Note` представляє модель даних для нотатки. Він містить поля для зберігання інформації про заголовок, опис, рівень важливості, дату та час створення, а також шлях до зображення, пов’язаного з нотаткою. Клас включає конструктор для ініціалізації об’єкта та геттери для отримання значень полів. [ДОДАТОК А]
+
+2. Клас `NoteAdapter.java`
+Призначення:  
+Адаптер для відображення списку нотаток у `RecyclerView`. Він зв’язує дані з елементами інтерфейсу. Клас містить методи для створення елементів списку, заповнення їх даними та повернення кількості елементів у списку. Також реалізовано внутрішній клас `NoteViewHolder`, який відповідає за відображення окремого елемента списку. [ДОДАТОК Б]
+
+3. Клас `MainActivity.java`
+Призначення:  
+Головна активність додатку, яка відображає список нотаток. Вона ініціалізує `RecyclerView`, налаштовує адаптер та обробляє додавання, редагування та видалення нотаток. Також реалізовано функції пошуку та фільтрації нотаток за текстом і рівнем важливості. Активність використовує `Toolbar` для відображення меню та контекстного меню для редагування та видалення нотаток. [ДОДАТОК В]
+
+4. Клас `NoteActivity.java`
+Призначення:  
+Активність для створення або редагування нотатки. Вона містить поля для введення заголовка, опису, вибору рівня важливості, дати та часу, а також вибору зображення з галереї. Активність повертає результат у вигляді об’єкта `Note` до `MainActivity`. [ДОДАТОК Г]
+
+5. Макет `activity_main.xml`
+Призначення:  
+Макет головної активності. Він містить `Toolbar` для відображення меню, кнопку для додавання нової нотатки та `RecyclerView` для відображення списку нотаток. [ДОДАТОК Д]
+
+6. Макет `activity_note.xml`
+Призначення:  
+Макет активності для створення або редагування нотатки. Він включає поля для введення заголовка, опису, вибору рівня важливості, дати та часу, а також елемент для вибору зображення з галереї. Також є кнопки для збереження або скасування змін. [ДОДАТОК Е]
+
+7. Макет `item_note.xml`
+Призначення:  
+Макет окремого елемента списку нотаток у `RecyclerView`. Він містить елементи для відображення заголовка, дати та часу створення, іконки рівня важливості та зображення нотатки. [ДОДАТОК Є]
+
+8. Меню `menu_main.xml`
+Призначення:  
+Меню для `Toolbar` у головній активності. Воно містить елементи для пошуку та фільтрації нотаток за рівнем важливості. [ДОДАТОК Ж]
+
+9. Меню `context_menu.xml`
+Призначення:  
+Контекстне меню для елементів списку нотаток. Воно містить опції для редагування та видалення нотаток. [ДОДАТОК З]
+
+10. Іконки
+Призначення:  
+Іконки для відображення рівня важливості нотаток (низька, середня, висока), а також іконки для пошуку та фільтрації в `Toolbar`.
+
+11. Локалізація
+Призначення:  
+Файли `strings.xml` для зберігання текстових ресурсів українською та англійською мовами. Вони містять тексти для кнопок, заголовків, підказок та інших елементів інтерфейсу. [ДОДАТОК И]
+
+12. Кольори
+Призначення:  
+Файл `colors.xml` для зберігання кольорів, які використовуються в додатку. Він містить кольори для фону, тексту, кнопок та інших елементів інтерфейсу. [ДОДАТОК І]
+
+
+13. Дозвіл на доступ до зовнішнього сховища
+Призначення:  
+Дозвіл на читання зовнішнього сховища для вибору зображень з галереї. Він додається у файл `AndroidManifest.xml`.
+
+
+
+
+
+
+
+
+
+ВИСНОВКИ
+     
+     Посилання на відео в YouTube: https://youtu.be/duG2W4RJUt8
+     
+     У ході лабораторної роботи я навчився розробляти мобільний додаток для платформи Android, що дозволяє створювати, редагувати, переглядати та видаляти нотатки. Я освоїв роботу з графічними елементами інтерфейсу, такими як іконки та контекстне меню, а також навчився реалізовувати функціонал пошуку та фільтрації нотаток за змістом і важливістю. 
+
+ВИКОРИСТАННІ ДЖЕРЕЛА
+
+1. YouTube. " Як Зробити Android Додаток з Нуля" https://www.youtube.com/watch?v=p0tmWQIKk4g. 
+2. Національний університет радіоелектроніки. https://dl.nure.ua/. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+[ДОДАТОК А]
+
+1. package com.example.kostiantyn_leshchenko_pzpi_23_8;
+2. 
+3. import java.io.Serializable;
+4. 
+5. public class Note implements Serializable {
+6.     private String title;
+7.     private String description;
+8.     private int priority; // 1 - Low, 2 - Medium, 3 - High
+9.     private String dateTime;
+10.    private String imagePath;
+11. 
+12.    public Note(String title, String description, int priority, String dateTime, String imagePath) {
+13.        this.title = title;
+14.        this.description = description;
+15.        this.priority = priority;
+16.        this.dateTime = dateTime;
+17.        this.imagePath = imagePath;
+18.    }
+19. 
+20.    // Геттери та сеттери
+21.    public String getTitle() { return title; }
+22.    public String getDescription() { return description; }
+23.    public int getPriority() { return priority; }
+24.    public String getDateTime() { return dateTime; }
+25.    public String getImagePath() { return imagePath; }
+26. }
+
+
+
+
+[ДОДАТОК Б]
+1. package com.example.kostiantyn_leshchenko_pzpi_23_8;
+2. 
+3. import android.content.Context;
+4. import android.graphics.Bitmap;
+5. import android.graphics.BitmapFactory;
+6. import android.view.LayoutInflater;
+7. import android.view.View;
+8. import android.view.ViewGroup;
+9. import android.widget.ImageView;
+10. import android.widget.TextView;
+11. 
+12. import androidx.annotation.NonNull;
+13. import androidx.recyclerview.widget.RecyclerView;
+14. 
+15. import java.util.List;
+16. 
+17. public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder> {
+18.     private List<Note> notes;
+19.     private Context context;
+20.     private int contextMenuPosition = -1; // Зберігає позицію елемента для контекстного меню
+21. 
+22.     public NoteAdapter(List<Note> notes, Context context) {
+23.         this.notes = notes;
+24.         this.context = context;
+25.     }
+26. 
+27.     @NonNull
+28.     @Override
+29.     public NoteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+30.         View view = LayoutInflater.from(context).inflate(R.layout.item_note, parent, false);
+31.         return new NoteViewHolder(view);
+32.     }
+33. 
+34.     @Override
+35.     public void onBindViewHolder(@NonNull NoteViewHolder holder, int position) {
+36.         Note note = notes.get(position);
+37.         holder.title.setText(note.getTitle());
+38.         holder.dateTime.setText(note.getDateTime());
+39. 
+40.         // Встановлення іконки важливості
+41.         int priorityIcon = R.drawable.ic_priority_low; // За замовчуванням
+42.         switch (note.getPriority()) {
+43.             case 2: priorityIcon = R.drawable.ic_priority_medium; break;
+44.             case 3: priorityIcon = R.drawable.ic_priority_high; break;
+45.         }
+46.         holder.priorityIcon.setImageResource(priorityIcon);
+47. 
+48.         // Встановлення зображення нотатки
+49.         if (note.getImagePath() != null) {
+50.             Bitmap bitmap = BitmapFactory.decodeFile(note.getImagePath());
+51.             holder.noteImage.setImageBitmap(bitmap);
+52.         }
+53. 
+54.         // Довге натискання для контекстного меню
+55.         holder.itemView.setOnLongClickListener(v -> {
+56.             contextMenuPosition = position; // Зберігаємо позицію елемента
+57.             ((MainActivity) context).openContextMenu(v); // Відкриваємо контекстне меню
+58.             return true;
+59.         });
+60.     }
+61. 
+62.     @Override
+63.     public int getItemCount() { return notes.size(); }
+64. 
+65.     // Метод для отримання позиції елемента для контекстного меню
+66.     public int getContextMenuPosition() {
+67.         return contextMenuPosition;
+68.     }
+69. 
+70.     public static class NoteViewHolder extends RecyclerView.ViewHolder {
+71.         TextView title, dateTime;
+72.         ImageView priorityIcon, noteImage;
+73. 
+74.         public NoteViewHolder(@NonNull View itemView) {
+75.             super(itemView);
+76.             title = itemView.findViewById(R.id.note_title);
+77.             dateTime = itemView.findViewById(R.id.note_date_time);
+78.             priorityIcon = itemView.findViewById(R.id.priority_icon);
+79.             noteImage = itemView.findViewById(R.id.note_image);
+80.         }
+81.     }
+82. }
+
+
+
+[ДОДАТОК В]
+
+1. package com.example.kostiantyn_leshchenko_pzpi_23_8;
+2. 
+3. import android.content.Intent;
+4. import android.os.Bundle;
+5. import android.view.ContextMenu;
+6. import android.view.Menu;
+7. import android.view.MenuItem;
+8. import android.view.View;
+9. import androidx.appcompat.widget.Toolbar; 
+10. 
+11. import androidx.annotation.NonNull;
+12. import androidx.appcompat.app.AlertDialog;
+13. import androidx.appcompat.app.AppCompatActivity;
+14. import androidx.appcompat.widget.SearchView;
+15. import androidx.recyclerview.widget.LinearLayoutManager;
+16. import androidx.recyclerview.widget.RecyclerView;
+17. import java.util.ArrayList;
+18. import java.util.List;
+19. 
+20. public class MainActivity extends AppCompatActivity {
+21.     private RecyclerView recyclerView;
+22.     private NoteAdapter adapter;
+23.     private List<Note> notes = new ArrayList<>();
+24. 
+25.     @Override
+26.     protected void onCreate(Bundle savedInstanceState) {
+27.         super.onCreate(savedInstanceState);
+28.         setContentView(R.layout.activity_main);
+29. 
+30.         // Ініціалізація Toolbar
+31.         Toolbar toolbar = findViewById(R.id.toolbar);
+32.         setSupportActionBar(toolbar); // Встановлення Toolbar як ActionBar
+33.         // Ініціалізація RecyclerView
+34.         recyclerView = findViewById(R.id.recycler_view);
+35.         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+36. 
+37.         // Ініціалізація адаптера
+38.         adapter = new NoteAdapter(notes, this);
+39.         recyclerView.setAdapter(adapter);
+40. 
+41.         // Додавання нотатки через кнопку
+42.         findViewById(R.id.add_note).setOnClickListener(v -> {
+43.             Intent intent = new Intent(MainActivity.this, NoteActivity.class);
+44.             startActivityForResult(intent, 1);
+45.         });
+46. 
+47.         // Реєстрація контекстного меню для RecyclerView
+48.         registerForContextMenu(recyclerView);
+49.     }
+50. 
+51.     @Override
+52.     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+53.         super.onActivityResult(requestCode, resultCode, data);
+54.         if (requestCode == 1 && resultCode == RESULT_OK) {
+55.             // Отримання нової нотатки з NoteActivity
+56.             Note note = (Note) data.getSerializableExtra("note");
+57.             notes.add(note);
+58.             adapter.notifyDataSetChanged(); // Оновлення списку
+59.         }
+60.     }
+61. 
+62.     @Override
+63.     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+64.         super.onCreateContextMenu(menu, v, menuInfo);
+65.         // Завантаження контекстного меню з XML
+66.         getMenuInflater().inflate(R.menu.context_menu, menu);
+67.     }
+68. 
+69.     @Override
+70.     public boolean onContextItemSelected(MenuItem item) {
+71.         // Отримання позиції елемента з адаптера
+72.         int position = adapter.getContextMenuPosition();
+73. 
+74.         if (item.getItemId() == R.id.edit_note) {
+75.             // Редагування нотатки
+76.             Intent intent = new Intent(this, NoteActivity.class);
+77.             intent.putExtra("note", notes.get(position));
+78.             startActivityForResult(intent, 2);
+79.             return true;
+80.         } else if (item.getItemId() == R.id.delete_note) {
+81.             // Видалення нотатки
+82.             new AlertDialog.Builder(this)
+83.                     .setTitle("Видалити нотатку")
+84.                     .setMessage("Ви впевнені, що хочете видалити цю нотатку?")
+85.                     .setPositiveButton("Так", (dialog, which) -> {
+86.                         notes.remove(position);
+87.                         adapter.notifyDataSetChanged(); // Оновлення списку
+88.                     })
+89.                     .setNegativeButton("Ні", null)
+90.                     .show();
+91.             return true;
+92.         }
+93.         return super.onContextItemSelected(item);
+94.     }
+95. 
+96.     @Override
+97.     public boolean onCreateOptionsMenu(Menu menu) {
+98.         // Завантаження меню з XML
+99.         getMenuInflater().inflate(R.menu.menu_main, menu);
+100. 
+101.         // Пошук
+102.         MenuItem searchItem = menu.findItem(R.id.action_search);
+103.         SearchView searchView = (SearchView) searchItem.getActionView();
+104.         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+105.             @Override
+106.             public boolean onQueryTextSubmit(String query) {
+107.                 filterNotesByText(query); // Фільтрація за текстом
+108.                 return true;
+109.             }
+110. 
+111.             @Override
+112.             public boolean onQueryTextChange(String newText) {
+113.                 filterNotesByText(newText); // Фільтрація за текстом
+114.                 return true;
+115.             }
+116.         });
+117. 
+118.         // Фільтрація за важливістю
+119.         MenuItem filterItem = menu.findItem(R.id.action_filter);
+120.         filterItem.setOnMenuItemClickListener(item -> {
+121.             showFilterDialog(); // Відображення діалогу фільтрації
+122.             return true;
+123.         });
+124. 
+125.         return true;
+126.     }
+127. 
+128.     // Фільтрація нотаток за текстом
+129.     private void filterNotesByText(String query) {
+130.         List<Note> filteredNotes = new ArrayList<>();
+131.         for (Note note : notes) {
+132.             if (note.getTitle().toLowerCase().contains(query.toLowerCase()) ||
+133.                     note.getDescription().toLowerCase().contains(query.toLowerCase())) {
+134.                 filteredNotes.add(note);
+135.             }
+136.         }
+137.         adapter = new NoteAdapter(filteredNotes, this);
+138.         recyclerView.setAdapter(adapter);
+139.     }
+140. 
+141.     // Діалог фільтрації за важливістю
+142.     private void showFilterDialog() {
+143.         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+144.         builder.setTitle("Фільтрація за важливістю");
+145.         builder.setItems(new String[]{"Низька", "Середня", "Висока"}, (dialog, which) -> {
+146.             List<Note> filteredNotes = new ArrayList<>();
+147.             for (Note note : notes) {
+148.                 if (note.getPriority() == which + 1) {
+149.                     filteredNotes.add(note);
+150.                 }
+151.             }
+152.             adapter = new NoteAdapter(filteredNotes, this);
+153.             recyclerView.setAdapter(adapter);
+154.         });
+155.         builder.show();
+156.     }
+157. }
+
+
+
+[ДОДАТОК Г]
+
+1. package com.example.kostiantyn_leshchenko_pzpi_23_8;
+2. 
+3. import android.app.DatePickerDialog;
+4. import android.app.TimePickerDialog;
+5. import android.content.Intent;
+6. import android.net.Uri;
+7. import android.os.Bundle;
+8. import android.provider.MediaStore;
+9. import android.widget.Button;
+10. import android.widget.EditText;
+11. import android.widget.ImageView;
+12. import android.widget.RadioGroup;
+13. 
+14. import androidx.annotation.Nullable;
+15. import androidx.appcompat.app.AppCompatActivity;
+16. 
+17. import java.text.SimpleDateFormat;
+18. import java.util.Calendar;
+19. import java.util.Date;
+20. import java.util.Locale;
+21. 
+22. public class NoteActivity extends AppCompatActivity {
+23.     private EditText titleInput, descriptionInput;
+24.     private RadioGroup priorityGroup;
+25.     private Button saveButton, cancelButton, selectDateTimeButton;
+26.     private ImageView noteImage;
+27.     private String imagePath = "";
+28.     private String selectedDateTime = "";
+29. 
+30.     @Override
+31.     protected void onCreate(@Nullable Bundle savedInstanceState) {
+32.         super.onCreate(savedInstanceState);
+33.         setContentView(R.layout.activity_note);
+34. 
+35.         titleInput = findViewById(R.id.title_input);
+36.         descriptionInput = findViewById(R.id.description_input);
+37.         priorityGroup = findViewById(R.id.priority_group);
+38.         saveButton = findViewById(R.id.save_button);
+39.         cancelButton = findViewById(R.id.cancel_button);
+40.         selectDateTimeButton = findViewById(R.id.select_date_time);
+41.         noteImage = findViewById(R.id.note_image);
+42. 
+43.         // Вибір зображення з галереї
+44.         noteImage.setOnClickListener(v -> {
+45.             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+46.             startActivityForResult(intent, 1);
+47.         });
+48. 
+49.         // Вибір дати та часу
+50.         selectDateTimeButton.setOnClickListener(v -> showDateTimePicker());
+51. 
+52.         saveButton.setOnClickListener(v -> saveNote());
+53.         cancelButton.setOnClickListener(v -> finish());
+54.     }
+55. 
+56.     private void showDateTimePicker() {
+57.         final Calendar calendar = Calendar.getInstance();
+58.         DatePickerDialog datePickerDialog = new DatePickerDialog(this, (view, year, month, dayOfMonth) -> {
+59.             TimePickerDialog timePickerDialog = new TimePickerDialog(this, (view1, hourOfDay, minute) -> {
+60.                 calendar.set(year, month, dayOfMonth, hourOfDay, minute);
+61.                 selectedDateTime = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault()).format(calendar.getTime());
+62.             }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
+63.             timePickerDialog.show();
+64.         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+65.         datePickerDialog.show();
+66.     }
+67. 
+68.     private void saveNote() {
+69.         String title = titleInput.getText().toString();
+70.         String description = descriptionInput.getText().toString();
+71.         int priority = priorityGroup.getCheckedRadioButtonId() == R.id.priority_high ? 3 :
+72.                 priorityGroup.getCheckedRadioButtonId() == R.id.priority_medium ? 2 : 1;
+73.         String dateTime = selectedDateTime.isEmpty() ?
+74.                 new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault()).format(new Date()) :
+75.                 selectedDateTime;
+76. 
+77.         Note note = new Note(title, description, priority, dateTime, imagePath);
+78.         Intent intent = new Intent();
+79.         intent.putExtra("note", note);
+80.         setResult(RESULT_OK, intent);
+81.         finish();
+82.     }
+83. 
+84.     @Override
+85.     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+86.         super.onActivityResult(requestCode, resultCode, data);
+87.         if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
+88.             Uri selectedImage = data.getData();
+89.             imagePath = selectedImage.toString();
+90.             noteImage.setImageURI(selectedImage);
+91.         }
+92.     }
+93. }
+
+
+
+[ДОДАТОК Д]
+
+1. <?xml version="1.0" encoding="utf-8"?>
+2. <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+3.     android:layout_width="match_parent"
+4.     android:layout_height="match_parent"
+5.     xmlns:app="http://schemas.android.com/apk/res-auto"
+6.     android:orientation="vertical"
+7.     android:padding="16dp">
+8. 
+9.     <androidx.appcompat.widget.Toolbar
+10.         android:id="@+id/toolbar"
+11.         android:layout_width="match_parent"
+12.         android:layout_height="?attr/actionBarSize"
+13.         android:background="?attr/colorPrimary"
+14.         android:elevation="4dp"
+15.         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+16.         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+17. 
+18.     <Button
+19.         android:id="@+id/add_note"
+20.         android:layout_width="wrap_content"
+21.         android:layout_height="wrap_content"
+22.         android:text="@string/add_note"
+23.         android:layout_gravity="end"
+24.         android:backgroundTint="@color/purple_500" />
+25. 
+26.     <androidx.recyclerview.widget.RecyclerView
+27.         android:id="@+id/recycler_view"
+28.         android:layout_width="match_parent"
+29.         android:layout_height="match_parent"
+30.         android:layout_marginTop="16dp" />
+31. </LinearLayout>
+
+
+[ДОДАТОК Е]
+
+1. <?xml version="1.0" encoding="utf-8"?>
+2. <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+3.     android:layout_width="match_parent"
+4.     android:layout_height="match_parent"
+5.     android:padding="16dp">
+6. 
+7.     <LinearLayout
+8.         android:layout_width="match_parent"
+9.         android:layout_height="wrap_content"
+10.         android:orientation="vertical"
+11.         android:padding="16dp">
+12. 
+13.         <EditText
+14.             android:id="@+id/title_input"
+15.             android:layout_width="match_parent"
+16.             android:layout_height="wrap_content"
+17.             android:hint="@string/title_hint"
+18.             android:inputType="textCapSentences" />
+19. 
+20.         <EditText
+21.             android:id="@+id/description_input"
+22.             android:layout_width="match_parent"
+23.             android:layout_height="wrap_content"
+24.             android:hint="@string/description_hint"
+25.             android:inputType="textMultiLine"
+26.             android:layout_marginTop="16dp" />
+27. 
+28.         <RadioGroup
+29.             android:id="@+id/priority_group"
+30.             android:layout_width="match_parent"
+31.             android:layout_height="wrap_content"
+32.             android:layout_marginTop="16dp"
+33.             android:orientation="horizontal">
+34. 
+35.             <RadioButton
+36.                 android:id="@+id/priority_low"
+37.                 android:layout_width="wrap_content"
+38.                 android:layout_height="wrap_content"
+39.                 android:text="@string/priority_low" />
+40. 
+41.             <RadioButton
+42.                 android:id="@+id/priority_medium"
+43.                 android:layout_width="wrap_content"
+44.                 android:layout_height="wrap_content"
+45.                 android:text="@string/priority_medium"
+46.                 android:layout_marginStart="16dp" />
+47. 
+48.             <RadioButton
+49.                 android:id="@+id/priority_high"
+50.                 android:layout_width="wrap_content"
+51.                 android:layout_height="wrap_content"
+52.                 android:text="@string/priority_high"
+53.                 android:layout_marginStart="16dp" />
+54.         </RadioGroup>
+55. 
+56.         <Button
+57.             android:id="@+id/select_date_time"
+58.             android:layout_width="match_parent"
+59.             android:layout_height="wrap_content"
+60.             android:text="Вибрати дату та час"
+61.             android:layout_marginTop="16dp" />
+62. 
+63.         <ImageView
+64.             android:id="@+id/note_image"
+65.             android:layout_width="100dp"
+66.             android:layout_height="100dp"
+67.             android:layout_marginTop="16dp"
+68.             android:src="@drawable/ic_add_image"
+69.             android:scaleType="centerCrop"
+70.             android:background="@color/gray_200" />
+71. 
+72.         <LinearLayout
+73.             android:layout_width="match_parent"
+74.             android:layout_height="wrap_content"
+75.             android:orientation="horizontal"
+76.             android:layout_marginTop="16dp"
+77.             android:gravity="end">
+78. 
+79.             <Button
+80.                 android:id="@+id/cancel_button"
+81.                 android:layout_width="wrap_content"
+82.                 android:layout_height="wrap_content"
+83.                 android:text="@string/cancel_button"
+84.                 android:backgroundTint="@color/gray_500" />
+85. 
+86.             <Button
+87.                 android:id="@+id/save_button"
+88.                 android:layout_width="wrap_content"
+89.                 android:layout_height="wrap_content"
+90.                 android:text="@string/save_button"
+91.                 android:layout_marginStart="16dp"
+92.                 android:backgroundTint="@color/purple_500" />
+93.         </LinearLayout>
+94.     </LinearLayout>
+95. </ScrollView>
+
+
+[ДОДАТОК Є]
+
+1. <?xml version="1.0" encoding="utf-8"?>
+2. <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+3.     android:layout_width="match_parent"
+4.     android:layout_height="wrap_content"
+5.     android:orientation="horizontal"
+6.     android:padding="8dp"
+7.     android:background="@color/white"
+8.     android:elevation="2dp"
+9.     android:layout_marginBottom="8dp">
+10. 
+11.     <ImageView
+12.         android:id="@+id/note_image"
+13.         android:layout_width="50dp"
+14.         android:layout_height="50dp"
+15.         android:scaleType="centerCrop"
+16.         android:background="@color/gray_200" />
+17. 
+18.     <LinearLayout
+19.         android:layout_width="0dp"
+20.         android:layout_height="wrap_content"
+21.         android:layout_weight="1"
+22.         android:orientation="vertical"
+23.         android:paddingStart="16dp">
+24. 
+25.         <TextView
+26.             android:id="@+id/note_title"
+27.             android:layout_width="match_parent"
+28.             android:layout_height="wrap_content"
+29.             android:textSize="16sp"
+30.             android:textStyle="bold" />
+31. 
+32.         <TextView
+33.             android:id="@+id/note_date_time"
+34.             android:layout_width="match_parent"
+35.             android:layout_height="wrap_content"
+36.             android:textSize="12sp"
+37.             android:textColor="@color/gray_500" />
+38.     </LinearLayout>
+39. 
+40.     <ImageView
+41.         android:id="@+id/priority_icon"
+42.         android:layout_width="24dp"
+43.         android:layout_height="24dp"
+44.         android:layout_gravity="center_vertical"
+45.         android:layout_marginStart="16dp" />
+46. </LinearLayout>
+
+
+[ДОДАТОК Ж]
+
+1. <?xml version="1.0" encoding="utf-8"?>
+2. <menu xmlns:android="http://schemas.android.com/apk/res/android"
+3.     xmlns:app="http://schemas.android.com/apk/res-auto">
+4.     <item
+5.         android:id="@+id/action_search"
+6.         android:title="Пошук"
+7.         android:icon="@drawable/ic_search"
+8.         app:showAsAction="always|collapseActionView"
+9.         app:actionViewClass="androidx.appcompat.widget.SearchView" />
+10.     <item
+11.         android:id="@+id/action_filter"
+12.         android:title="Фільтр"
+13.         android:icon="@drawable/ic_filter"
+14.         app:showAsAction="always" />
+15. </menu>
+
+
+[ДОДАТОК З]
+
+1. <?xml version="1.0" encoding="utf-8"?>
+2. <menu xmlns:android="http://schemas.android.com/apk/res/android">
+3.     <item android:id="@+id/edit_note" android:title="Редагувати" />
+4.     <item android:id="@+id/delete_note" android:title="Видалити" />
+5. </menu>
+
+
+[ДОДАТОК И]
+
+1. <resources>
+2.     <string name="app_name">Notes App</string>
+3.     <string name="add_note">Add Note</string>
+4.     <string name="title_hint">Title</string>
+5.     <string name="description_hint">Description</string>
+6.     <string name="save_button">Save</string>
+7.     <string name="cancel_button">Cancel</string>
+8.     <string name="priority_low">Low</string>
+9.     <string name="priority_medium">Medium</string>
+10.     <string name="priority_high">High</string>
+11.     <string name="edit_note">Edit</string>
+12.     <string name="delete_note">Delete</string>
+13.     <string name="search_hint">Search notes</string>
+14.     <string name="filter_by_priority">Filter by priority</string>
+15. </resources>
+
+
+[ДОДАТОК І]
+
+1. <?xml version="1.0" encoding="utf-8"?>
+2. <resources>
+3.     <color name="purple_500">#FF6200EE</color>
+4.     <color name="purple_700">#FF3700B3</color>
+5.     <color name="teal_200">#FF03DAC5</color>
+6.     <color name="teal_700">#FF018786</color>
+7.     <color name="black">#FF000000</color>
+8.     <color name="white">#FFFFFFFF</color>
+9.     
+10.     <color name="gray_200">#EEEEEE</color>
+11.     <color name="gray_500">#9E9E9E</color>
+12.     <color name="gray_700">#616161</color>
+13. </resources>
+
+
+2
+
+
