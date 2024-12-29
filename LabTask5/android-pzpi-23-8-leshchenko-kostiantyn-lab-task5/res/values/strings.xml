@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Додаток нотаток</string>
+    <string name="add_note">Додати нотатку</string>
+    <string name="title_hint">Назва</string>
+    <string name="description_hint">Опис</string>
+    <string name="save_button">Зберегти</string>
+    <string name="cancel_button">Скасувати</string>
+    <string name="priority_low">Низька</string>
+    <string name="priority_medium">Середня</string>
+    <string name="priority_high">Висока</string>
+    <string name="edit_note">Редагувати</string>
+    <string name="delete_note">Видалити</string>
+    <string name="search_hint">Пошук нотаток</string>
+    <string name="filter_by_priority">Фільтрувати за важливістю</string>
+</resources>
