@@ -1,0 +1,313 @@
+﻿Харківський університет радіоелектроніки
+Факультет комп'ютерних наук
+Кафедра програмної інженерії
+
+
+
+
+
+
+
+ЗВІТ
+до лабораторного заняття 5 з дисципліни
+"Програмування під Android"
+на тему " Застосунок для ведення нотаток."
+
+
+
+
+
+
+Виконав ст. гр ПЗПІ-23-8                                                 Перевірив
+Лещенко Костянтин Сергійович                                     ст. викладач кафедри ПІ
+                                                                                            Сокорчук Ігор Петрович
+
+
+
+Харків 2024
+
+МЕТА
+     
+Метою цієї лабораторної роботи є ознайомлення студентів із базовими принципами створення мобільних додатків для платформи Android. У ході роботи студенти мають освоїти використання різноманітних функцій інтерфейсу та налаштувань програми. Основний акцент зроблено на реалізації адаптивного інтерфейсу, який змінюється залежно від орієнтації екрану (портретна чи ландшафтна), створенні й застосуванні тем оформлення, які можна редагувати, а також додаванні можливості зміни розміру шрифтів через налаштування. Крім того, студенти мають реалізувати функціонал для збереження й редагування нотаток у базі даних SQLite, що забезпечить збереження даних між сесіями роботи програми.
+
+
+ЗАВДАННЯ
+
+1. Доповнити завдання №4 наступними функціями:
+• реалізувати різне відображення для портретної та ланшафтної орієнтації екрану за допомогою тих самих фрагментів;
+• створити дві редаговані теми (тло, гарнітура шрифту, колір тексту тощо) і застосовувати їх в залежності від налаштувань програми.
+• додати можливість задавати в налаштуваннях програми розмір шрифту.
+2. Переробити завдання №4 так, щоб дані нотаток зберігалися у базі даних SQLite
+
+
+
+
+
+ХІД РОБОТИ
+DatabaseHelper.java
+Клас DatabaseHelper є основним компонентом для роботи з базою даних SQLite в додатку. Він відповідає за створення, оновлення та управління таблицею нотаток. У методі onCreate() створюється таблиця notes, яка містить такі стовпці:
+• id — унікальний ідентифікатор нотатки;
+• title — заголовок нотатки;
+• description — опис нотатки;
+• priority — рівень важливості нотатки (низький, середній, високий);
+• date_time — дата та час створення нотатки;
+• image_path — шлях до зображення, пов’язаного з нотаткою.
+Метод onUpgrade() використовується для оновлення структури бази даних при зміні її версії. Наприклад, якщо версія бази даних змінюється з 1 на 2, додається новий стовпець priority.
+Метод addNote() додає нову нотатку до бази даних, приймаючи об’єкт Note і зберігаючи його дані в таблиці. Метод getAllNotes() отримує всі нотатки з бази даних і повертає їх у вигляді списку об’єктів Note.
+Метод updateNote() оновлює існуючу нотатку, змінюючи її дані в базі даних. Метод deleteNote() видаляє нотатку за її ідентифікатором.
+Таким чином, DatabaseHelper забезпечує повний цикл роботи з даними нотаток: додавання, оновлення, отримання та видалення.[ДОДАТОК А]
+
+SettingsActivity.java
+Клас SettingsActivity відповідає за екран налаштувань додатку, де користувач налаштовувати розмір шрифту.
+У методі onCreate() ініціалізуються елементи інтерфейсу, такі як SeekBar для зміни розміру шрифту та кнопка для збереження налаштувань. Поточні налаштування завантажуються з SharedPreferences і застосовуються до елементів інтерфейсу.
+Метод saveFontSize() зберігає вибраний розмір шрифту в SharedPreferences і закриває активність після збереження.
+Таким чином, SettingsActivity надає користувачу зручний інтерфейс для персоналізації додатку. [ДОДАТОК Б]
+
+activity_settings.xml
+Цей XML-файл описує інтерфейс екрану налаштувань. Він містить такі елементи:
+• TextView з заголовком "Розмір шрифту";
+• SeekBar для вибору розміру шрифту, який дозволяє змінювати значення від 10 до 30;
+• Кнопка "Зберегти" для збереження вибраних налаштувань.
+Весь інтерфейс розташований у вертикальному LinearLayout з відступами 16dp для кращого вигляду.
+SeekBar дозволяє користувачу плавно змінювати розмір шрифту, що відображається в додатку. Після збереження налаштувань новий розмір шрифту застосовується до всіх текстових елементів.
+Таким чином, activity_settings.xml забезпечує зручний та інтуїтивно зрозумілий інтерфейс для налаштувань додатку. [ДОДАТОК Г]
+
+
+
+ВИСНОВОК
+
+Посилання на відео в YouTube: https://youtu.be/U3cA1ZEzFmE
+
+У процесі роботи ми навчилися ефективно працювати з базою даних SQLite, реалізовувати персоналізацію інтерфейсу за допомогою тем та налаштувань розміру шрифту, а також створювати адаптивний інтерфейс, який коректно відображається в різних орієнтаціях екрану. Ці навички дозволили покращити функціональність та зручність додатку, забезпечивши користувачам більш комфортний досвід взаємодії. Робота над проектом також допомогла краще зрозуміти принципи роботи з даними, налаштуваннями та адаптацією інтерфейсу під різні умови використання.
+
+ВИКОРИСТАННІ ДЖЕРЕЛА
+
+1. YouTube. " Як Зробити Android Додаток з Нуля" https://www.youtube.com/watch?v=p0tmWQIKk4g. Дата доступу: 
+
+
+
+
+
+
+[ДОДАТОК А]
+
+1  package com.example.kostiantyn_leshchenko_pzpi_23_8;
+2  
+3  import android.content.ContentValues;
+4  import android.content.Context;
+5  import android.database.Cursor;
+6  import android.database.sqlite.SQLiteDatabase;
+7  import android.database.sqlite.SQLiteOpenHelper;
+8  import java.util.ArrayList;
+9  import java.util.List;
+10 
+11 public class DatabaseHelper extends SQLiteOpenHelper {
+12     public static final String DATABASE_NAME = "notes.db";
+13     private static final int DATABASE_VERSION = 2;
+14     private static final String TABLE_NOTES = "notes";
+15     private static final String COLUMN_ID = "id";
+16     private static final String COLUMN_TITLE = "title";
+17     private static final String COLUMN_DESCRIPTION = "description";
+18     private static final String COLUMN_PRIORITY = "priority";
+19     private static final String COLUMN_DATE_TIME = "date_time";
+20     private static final String COLUMN_IMAGE_PATH = "image_path";
+21 
+22     public DatabaseHelper(Context context) {
+23         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+24     }
+25 
+26     @Override
+27     public void onCreate(SQLiteDatabase db) {
+28         String CREATE_NOTES_TABLE = "CREATE TABLE " + TABLE_NOTES + "("
+29                 + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+30                 + COLUMN_TITLE + " TEXT,"
+31                 + COLUMN_DESCRIPTION + " TEXT,"
+32                 + COLUMN_PRIORITY + " INTEGER,"
+33                 + COLUMN_DATE_TIME + " TEXT,"
+34                 + COLUMN_IMAGE_PATH + " TEXT" + ")";
+35         db.execSQL(CREATE_NOTES_TABLE);
+36     }
+37 
+38     @Override
+39     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+40         if (oldVersion < 2) {
+41             db.execSQL("ALTER TABLE " + TABLE_NOTES + " ADD COLUMN " + COLUMN_PRIORITY + " INTEGER");
+42         }
+43     }
+44 
+45     public void addNote(Note note) {
+46         SQLiteDatabase db = this.getWritableDatabase();
+47         ContentValues values = new ContentValues();
+48         values.put(COLUMN_TITLE, note.getTitle());
+49         values.put(COLUMN_DESCRIPTION, note.getDescription());
+50         values.put(COLUMN_PRIORITY, note.getPriority());
+51         values.put(COLUMN_DATE_TIME, note.getDateTime());
+52         values.put(COLUMN_IMAGE_PATH, note.getImagePath());
+53         db.insert(TABLE_NOTES, null, values);
+54         db.close();
+55     }
+56 
+57     public List<Note> getAllNotes() {
+58         List<Note> notes = new ArrayList<>();
+59         SQLiteDatabase db = this.getReadableDatabase();
+60         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NOTES, null);
+61 
+62         if (cursor.moveToFirst()) {
+63             do {
+64                 Note note = new Note(
+65                         cursor.getString(1), // title
+66                         cursor.getString(2), // description
+67                         cursor.getInt(3),    // priority
+68                         cursor.getString(4), // date_time
+69                         cursor.getString(5)  // image_path
+70                 );
+71                 note.setId(cursor.getInt(0)); // Установка id
+72                 notes.add(note);
+73             } while (cursor.moveToNext());
+74         }
+75         cursor.close();
+76         db.close();
+77         return notes;
+78     }
+79 
+80     public void updateNote(Note note) {
+81         SQLiteDatabase db = this.getWritableDatabase();
+82         ContentValues values = new ContentValues();
+83         values.put(COLUMN_TITLE, note.getTitle());
+84         values.put(COLUMN_DESCRIPTION, note.getDescription());
+85         values.put(COLUMN_PRIORITY, note.getPriority());
+86         values.put(COLUMN_DATE_TIME, note.getDateTime());
+87         values.put(COLUMN_IMAGE_PATH, note.getImagePath());
+88 
+89         db.update(TABLE_NOTES, values, COLUMN_ID + " = ?", new String[]{String.valueOf(note.getId())});
+90         db.close();
+91     }
+92 
+93     public void deleteNote(int id) {
+94         SQLiteDatabase db = this.getWritableDatabase();
+95         db.delete(TABLE_NOTES, COLUMN_ID + " = ?", new String[]{String.valueOf(id)});
+96         db.close();
+97     }
+98 
+99     public List<Note> searchNotes(String query) {
+100         List<Note> notes = new ArrayList<>();
+101         SQLiteDatabase db = this.getReadableDatabase();
+102         Cursor cursor = db.rawQuery(
+103                 "SELECT * FROM " + TABLE_NOTES + " WHERE " + COLUMN_TITLE + " LIKE ? OR " + COLUMN_DESCRIPTION + " LIKE ?",
+104                 new String[]{"%" + query + "%", "%" + query + "%"}
+105         );
+106 
+107         if (cursor.moveToFirst()) {
+108             do {
+109                 Note note = new Note(
+110                         cursor.getString(1), // title
+111                         cursor.getString(2), // description
+112                         cursor.getInt(3),    // priority
+113                         cursor.getString(4), // date_time
+114                         cursor.getString(5)  // image_path
+115                 );
+116                 notes.add(note);
+117             } while (cursor.moveToNext());
+118         }
+119         cursor.close();
+120         db.close();
+121         return notes;
+122     }
+123 
+124     public List<Note> filterNotesByPriority(int priority) {
+125         List<Note> notes = new ArrayList<>();
+126         SQLiteDatabase db = this.getReadableDatabase();
+127         Cursor cursor = db.rawQuery(
+128                 "SELECT * FROM " + TABLE_NOTES + " WHERE " + COLUMN_PRIORITY + " = ?",
+129                 new String[]{String.valueOf(priority)}
+130         );
+131 
+132         if (cursor.moveToFirst()) {
+133             do {
+134                 Note note = new Note(
+135                         cursor.getString(1), // title
+136                         cursor.getString(2), // description
+137                         cursor.getInt(3),    // priority
+138                         cursor.getString(4), // date_time
+139                         cursor.getString(5)  // image_path
+140                 );
+141                 notes.add(note);
+142             } while (cursor.moveToNext());
+143         }
+144         cursor.close();
+145         db.close();
+146         return notes;
+147     }
+148 }
+
+
+[ДОДАТОК Б]
+
+1  package com.example.kostiantyn_leshchenko_pzpi_23_8;
+2  
+3  import android.content.SharedPreferences;
+4  import android.os.Bundle;
+5  import android.view.View;
+6  import android.widget.SeekBar;
+7  import androidx.appcompat.app.AppCompatActivity;
+8  
+9  public class SettingsActivity extends AppCompatActivity {
+10     private SeekBar fontSizeSeekBar;
+11     private SharedPreferences sharedPreferences;
+12 
+13     @Override
+14     protected void onCreate(Bundle savedInstanceState) {
+15         super.onCreate(savedInstanceState);
+16         setContentView(R.layout.activity_settings);
+17 
+18         sharedPreferences = getSharedPreferences("AppSettings", MODE_PRIVATE);
+19 
+20         fontSizeSeekBar = findViewById(R.id.font_size_seekbar);
+21         int savedFontSize = sharedPreferences.getInt(Settings.PREF_FONT_SIZE, (int) Settings.DEFAULT_FONT_SIZE);
+22         fontSizeSeekBar.setProgress(savedFontSize);
+23 
+24         findViewById(R.id.save_button).setOnClickListener(v -> saveFontSize());
+25     }
+26 
+27     private void saveFontSize() {
+28         int fontSize = fontSizeSeekBar.getProgress();
+29         SharedPreferences.Editor editor = sharedPreferences.edit();
+30         editor.putInt(Settings.PREF_FONT_SIZE, fontSize);
+31         editor.apply();
+32         finish(); // Закрываем активность после сохранения
+33     }
+34 }
+
+
+[ДОДАТОК Г]
+
+1  <?xml version="1.0" encoding="utf-8"?>
+2  <LinearLayout
+3      xmlns:android="http://schemas.android.com/apk/res/android"
+4      android:layout_width="match_parent"
+5      android:layout_height="match_parent"
+6      android:orientation="vertical"
+7      android:padding="16dp">
+8  
+9      <TextView
+10         android:layout_width="wrap_content"
+11         android:layout_height="wrap_content"
+12         android:text="Розмір шрифту"
+13         android:textSize="18sp" />
+14 
+15     <SeekBar
+16         android:id="@+id/font_size_seekbar"
+17         android:layout_width="match_parent"
+18         android:layout_height="wrap_content"
+19         android:max="30"
+20         android:progress="16" />
+21     
+22     <Button
+23         android:id="@+id/save_button"
+24         android:layout_width="wrap_content"
+25         android:layout_height="wrap_content"
+26         android:text="Зберегти" />
+27 </LinearLayout>
+2
+
+
